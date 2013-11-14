@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/vertical_list_layout"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <fr.irit.geotablet_interactions.common.MyMapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false" >
+        </fr.irit.geotablet_interactions.common.MyMapView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/horizontal_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="150dp" >
+    </LinearLayout>
+
+</LinearLayout>
