@@ -331,43 +331,43 @@ public class MainActivity extends Activity {
 	
 	
 	//Hélène's code to only display one osmnode
-	/*private void onTouchMapView(View v, float x, float y) {
-		Set<OsmNode> selectedNodes = new HashSet<OsmNode>();
-		if ((v != null) && ((v.getId() == R.id.vertical_list_layout) || (v.getId() == R.id.horizontal_list_layout))) {
-			selectedNodes = selectedItems.get(v);
-		} else {
-			for (Set<OsmNode> allSelectedNodes : selectedItems.values()) {
-				if (allSelectedNodes != null) {
-					selectedNodes.addAll(allSelectedNodes);
-				}
-			}
-		}
-		if (selectedNodes != null) {
-			for (OsmNode n : selectedNodes) {
-				if ((n.toPoint(mapView).y <= y + TARGET_SIZE / 2)
-						&& (n.toPoint(mapView).y >= y - TARGET_SIZE / 2)
-						&& (n.toPoint(mapView).x <= x + TARGET_SIZE / 2)
-						&& (n.toPoint(mapView).x >= x - TARGET_SIZE / 2)) {
-					if (!MyTTS.getInstance(this).isSpeaking()) {
-						String from = "";
-						if (v != null) {
-							from = " " + getResources().getString(R.string.finger) + " ";
-							if (v.getId() == R.id.vertical_list_layout) {
-								from += getResources().getString(R.string.left);
-							}
-							if (v.getId() == R.id.horizontal_list_layout) {
-								from += getResources().getString(R.string.bottom);
-							}
-						}
-						((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
-						MyTTS.getInstance(this).speak(
-								getResources().getString(R.string.found) + " " + n.getName() + from,
-								TextToSpeech.QUEUE_ADD,
-								null);
-					}
-				}
-			}
-		}
-	}*/
+//	private void onTouchMapView(View v, float x, float y) {
+//		Set<OsmNode> selectedNodes = new HashSet<OsmNode>();
+//		if ((v != null) && ((v.getId() == R.id.vertical_list_layout) || (v.getId() == R.id.horizontal_list_layout))) {
+//			selectedNodes = selectedItems.get(v);
+//		} else {
+//			for (Set<OsmNode> allSelectedNodes : selectedItems.values()) {
+//				if (allSelectedNodes != null) {
+//					selectedNodes.addAll(allSelectedNodes);
+//				}
+//			}
+//		}
+//		if (selectedNodes != null) {
+//			for (OsmNode n : selectedNodes) {
+//				if ((n.toPoint(mapView).y <= y + TARGET_SIZE / 2)
+//						&& (n.toPoint(mapView).y >= y - TARGET_SIZE / 2)
+//						&& (n.toPoint(mapView).x <= x + TARGET_SIZE / 2)
+//						&& (n.toPoint(mapView).x >= x - TARGET_SIZE / 2)) {
+//					if (!MyTTS.getInstance(this).isSpeaking()) {
+//						String from = "";
+//						if (v != null) {
+//							from = " " + getResources().getString(R.string.finger) + " ";
+//							if (v.getId() == R.id.vertical_list_layout) {
+//								from += getResources().getString(R.string.left);
+//							}
+//							if (v.getId() == R.id.horizontal_list_layout) {
+//								from += getResources().getString(R.string.bottom);
+//							}
+//						}
+//						((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
+//						MyTTS.getInstance(this).speak(
+//								getResources().getString(R.string.found) + " " + n.getName() + from,
+//								TextToSpeech.QUEUE_ADD,
+//								null);
+//					}
+//				}
+//			}
+//		}
+//	}
 
 }
