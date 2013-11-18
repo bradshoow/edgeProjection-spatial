@@ -322,7 +322,7 @@ public class MainActivity extends Activity {
 					&& (n.toPoint(mapView).x <= x + TARGET_SIZE / 2)
 					&& (n.toPoint(mapView).x >= x - TARGET_SIZE / 2)) {
 				if (!MyTTS.getInstance(this).isSpeaking()) {
-					((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
+					//((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
 					MyTTS.getInstance(this).speak(
 							n.getName(),
 							TextToSpeech.QUEUE_ADD,
