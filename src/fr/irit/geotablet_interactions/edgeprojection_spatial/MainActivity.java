@@ -9,7 +9,6 @@ import java.util.Set;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.MotionEventCompat;
 import android.view.Menu;
@@ -64,7 +63,7 @@ public class MainActivity extends Activity {
 					// Wait for display layout complete
 					// to be able to use the method toPoint
 					// (which uses map view properties)
-					@SuppressWarnings({ "deprecation", "deprecation" })
+					@SuppressWarnings({ "deprecation" })
 					public void onGlobalLayout() {
 						i++;
 
@@ -284,6 +283,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	@SuppressWarnings("serial")
 	private void initializeAdapaterList(ArrayAdapter<Set<OsmNode>> adapter, int itemsCount) {
 		List<Set<OsmNode>> verticalNodesArray = new ArrayList<Set<OsmNode>>(itemsCount);
 		for (int i = 0; i < itemsCount; i++) {

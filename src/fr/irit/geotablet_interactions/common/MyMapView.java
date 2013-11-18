@@ -34,7 +34,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-
 import fr.irit.edgeprojection_spatial.R;
 
 
@@ -206,6 +205,7 @@ public class MyMapView extends MapView {
 
 						// Wait for display layout complete
 						// to be able to use the method zoomToBoundingBox
+						@SuppressWarnings("deprecation")
 						public void onGlobalLayout() {
 							i++;
 							zoomToBoundingBox(bbox);

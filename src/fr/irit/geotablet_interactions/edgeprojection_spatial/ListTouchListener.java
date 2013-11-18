@@ -59,6 +59,7 @@ public class ListTouchListener implements OnTouchListener {
 		this.lastAdapterIndex = -1;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onTouch(View v, MotionEvent ev) {
 		int action = MotionEventCompat.getActionMasked(ev);
