@@ -179,6 +179,8 @@ public class MainActivity extends Activity {
 				case MotionEvent.ACTION_DOWN: {
 					// Save the ID of this pointer (for dragging)
 					activePointerId = MotionEventCompat.getPointerId(ev, 0);
+					int pointerIndex = MotionEventCompat.findPointerIndex(ev, activePointerId);
+					onTouchMapView(null, MotionEventCompat.getX(ev, pointerIndex), MotionEventCompat.getY(ev, pointerIndex));
 					break;
 				}
 
