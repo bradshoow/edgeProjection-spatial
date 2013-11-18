@@ -193,6 +193,7 @@ public class MainActivity extends Activity {
 
 				case MotionEvent.ACTION_UP: {
 					activePointerId = INVALID_POINTER_ID;
+					MyTTS.getInstance(getApplicationContext()).stop();
 					break;
 				}
 
