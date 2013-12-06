@@ -1,6 +1,7 @@
 package fr.irit.geotablet_interactions.edgeProjection;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +25,8 @@ import fr.irit.edgeProjection.R;
 import fr.irit.geotablet_interactions.common.MyMapView;
 import fr.irit.geotablet_interactions.common.MyTTS;
 import fr.irit.geotablet_interactions.common.OsmNode;
+import fr.irit.geotablet_interactions.edgeProjection.ListListener;
+import fr.irit.geotablet_interactions.edgeProjection.ListTouchListener;
 
 public class MainActivity extends Activity {
 	private static final int TARGET_SIZE = 96; // Touch target size for on screen elements
@@ -40,22 +43,80 @@ public class MainActivity extends Activity {
 
 		mapView = (MyMapView) findViewById(R.id.map_view);
 		final Set<OsmNode> nodes = mapView.getNodes();
+		
+		
+		
+		
 
 		// Initialize adapters
 		final ArrayAdapter<Set<OsmNode>> verticalAdapter = new ArrayAdapter<Set<OsmNode>>(
 				this, android.R.layout.simple_list_item_1, android.R.id.text1);
 		final ArrayAdapter<Set<OsmNode>> horizontalAdapter = new ArrayAdapter<Set<OsmNode>>(
 				this, android.R.layout.simple_list_item_1, android.R.id.text1);
+		
+		// Populate adapter with nodes
+		final ArrayAdapter<OsmNode> adapter = 
+				new ArrayAdapter<OsmNode>(
+						this,
+						android.R.layout.simple_list_item_1, android.R.id.text1,
+						new ArrayList<OsmNode>(nodes));
+		// Sort nodes by alphabetical order
+		adapter.sort(new Comparator<OsmNode>() {
+
+			@Override
+			public int compare(OsmNode node1, OsmNode node2) {
+				return node1.getName().compareTo(node2.getName());
+			}
+		});
+		
+		
+		
+		
+		
 
 		final LinearLayout verticalListLayout = (LinearLayout) findViewById(R.id.vertical_list_layout);
 		final LinearLayout horizontalListLayout = (LinearLayout) findViewById(R.id.horizontal_list_layout);
-
+		final LinearLayout list = (LinearLayout) findViewById(R.id.list);
+		
+		
+		
+		
 		// Initialize selectedItems and isOutsideView maps
 		selectedItems.put(verticalListLayout, null);
 		selectedItems.put(horizontalListLayout, null);
+
 		isOutsideView.put(verticalListLayout, ListTouchListener.OUTSIDE_VIEW);
 		isOutsideView.put(horizontalListLayout, ListTouchListener.OUTSIDE_VIEW);
 
+
+				list.getViewTreeObserver().addOnGlobalLayoutListener(
+				new OnGlobalLayoutListener() {
+
+					@Override
+					// Wait for display layout complete
+					// to be able to get view height
+					public void onGlobalLayout() {
+						// Iterate through nodes and display them
+						for (int i = 0; i < adapter.getCount(); i++) {
+							View adapterView = adapter.getView(i, null, null);
+							adapterView.setLayoutParams(
+									new LayoutParams(
+											LayoutParams.MATCH_PARENT,
+											list.getHeight() / adapter.getCount()));
+							list.addView(adapterView);
+						}
+						try {
+							list.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+						} catch (NoSuchMethodError x) {
+							list.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+						}
+					}
+				});
+		
+				// Set listener to the layout
+				list.setOnTouchListener(new ListListener(this, adapter));
+		
+		
 		mapView.getViewTreeObserver().addOnGlobalLayoutListener(
 				new OnGlobalLayoutListener() {
 					private int i = 0;
