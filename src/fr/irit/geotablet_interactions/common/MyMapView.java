@@ -34,7 +34,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import fr.irit.edgeprojection_spatial.R;
+import fr.irit.edgeProjection.R;
 
 
 /**

@@ -1,4 +1,4 @@
-package fr.irit.geotablet_interactions.edgeprojection_spatial;
+package fr.irit.geotablet_interactions.edgeProjection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import fr.irit.edgeprojection_spatial.R;
+import fr.irit.edgeProjection.R;
 import fr.irit.geotablet_interactions.common.MyMapView;
 import fr.irit.geotablet_interactions.common.MyTTS;
 import fr.irit.geotablet_interactions.common.OsmNode;

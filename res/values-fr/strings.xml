@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">EPSS</string>
+    <string name="app_name">edgeProj</string>
     <string name="action_settings">Paramètres</string>
     <string name="found">Trouvé</string>
     <string name="finger">Doigt</string>

@@ -1,4 +1,4 @@
-package fr.irit.geotablet_interactions.edgeprojection_spatial;
+package fr.irit.geotablet_interactions.edgeProjection;
 
 import java.util.Set;
 
