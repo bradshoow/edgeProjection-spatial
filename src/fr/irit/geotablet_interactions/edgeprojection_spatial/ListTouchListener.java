@@ -110,11 +110,7 @@ public class ListTouchListener implements OnTouchListener {
 						if (!selectedItem.toString().isEmpty()) {
 							((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(150);
 						}
-						if (direction == HORIZONTAL_DIRECTION) {
-							MyTTS.getInstance(context).setPitch(0.6f);
-						} else {
-							MyTTS.getInstance(context).setPitch(1.0f);
-						}
+						MyTTS.getInstance(context).setPitch(0.4f);
 						MyTTS.getInstance(context).speak(
 								selectedItem.toString(),
 								TextToSpeech.QUEUE_FLUSH, null);
