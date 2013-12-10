@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.MotionEventCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -315,13 +316,38 @@ public class MainActivity extends Activity {
 
 	//Mathieu's code's transformations to display all osmnode	
 	private void onTouchMapView(View v, float x, float y) {
+		//retrieve all nodes
 		final Set<OsmNode> nodes = mapView.getNodes();
+		//retrieve selected node
+		Set<OsmNode> selectedNodes = new HashSet<OsmNode>();
+		if ((v != null) && ((v.getId() == R.id.vertical_list_layout) || (v.getId() == R.id.horizontal_list_layout))) {
+			selectedNodes = selectedItems.get(v);
+		} else {
+			for (Set<OsmNode> allSelectedNodes : selectedItems.values()) {
+				if (allSelectedNodes != null) {
+					selectedNodes.addAll(allSelectedNodes);
+				}
+			}
+		}
+				
 		for (OsmNode n : nodes) {
 			if ((n.toPoint(mapView).y <= y + TARGET_SIZE / 2)
 					&& (n.toPoint(mapView).y >= y - TARGET_SIZE / 2)
 					&& (n.toPoint(mapView).x <= x + TARGET_SIZE / 2)
 					&& (n.toPoint(mapView).x >= x - TARGET_SIZE / 2)) {
-				if (!MyTTS.getInstance(this).isSpeaking()) {
+				if (  !MyTTS.getInstance(this).isSpeaking()  
+						&&  (selectedNodes.toString()).contains(n.getName()) 
+						) {
+					//((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
+					MyTTS.getInstance(this).setPitch(1.6f);
+					MyTTS.getInstance(this).speak(
+							getResources().getString(R.string.found) + 
+							n.getName(),
+							TextToSpeech.QUEUE_ADD,
+							null);
+				}
+				else if (!MyTTS.getInstance(this).isSpeaking()
+						) {
 					//((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
 					MyTTS.getInstance(this).setPitch(1.6f);
 					MyTTS.getInstance(this).speak(
