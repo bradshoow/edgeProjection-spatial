@@ -12,29 +12,29 @@
 
         <LinearLayout
             android:id="@+id/list"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:orientation="vertical" >
         </LinearLayout>
-                        <LinearLayout
-            android:id="@+id/vertical_list_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:orientation="vertical" >
-        </LinearLayout>
+ 
 
         <fr.irit.geotablet_interactions.common.MyMapView
             android:id="@+id/map_view"
-            android:layout_width="fill_parent"
+            android:layout_width="1040dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
             android:clickable="false" >
         </fr.irit.geotablet_interactions.common.MyMapView>
         
-
+                       <LinearLayout
+            android:id="@+id/vertical_list_layout"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:orientation="vertical" >
+        </LinearLayout>
         
     </LinearLayout>
     
@@ -44,7 +44,8 @@
         android:layout_height="150dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:paddingLeft="150dp" >
+        android:paddingLeft="120dp"
+        android:paddingRight="120dp" >
     </LinearLayout>
 
 </LinearLayout>
