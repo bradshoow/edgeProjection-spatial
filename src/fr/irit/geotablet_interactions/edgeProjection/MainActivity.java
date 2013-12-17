@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.MotionEventCompat;
@@ -38,6 +39,10 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+    	//set Full screen landscape
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		
+		
 		mapView = (MyMapView) findViewById(R.id.map_view);
 		final Set<OsmNode> nodes = mapView.getNodes();
 
