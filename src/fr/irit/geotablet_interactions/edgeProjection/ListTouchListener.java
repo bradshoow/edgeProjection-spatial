@@ -2,16 +2,15 @@ package fr.irit.geotablet_interactions.edgeProjection;
 
 import java.util.Set;
 
-import fr.irit.geotablet_interactions.common.MyTTS;
-import fr.irit.geotablet_interactions.common.OsmNode;
 import android.content.Context;
-import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Adapter;
+import fr.irit.geotablet_interactions.common.MyTTS;
+import fr.irit.geotablet_interactions.common.OsmNode;
 
 /**
  * Listener to scroll with finger(s) and read with TTS a list from an adapter
@@ -107,9 +106,9 @@ public class ListTouchListener implements OnTouchListener {
 							&& (lastAdapterIndex != adapterIndex
 								|| !MyTTS.getInstance(context).isSpeaking())) {
 						Object selectedItem = adapter.getItem(adapterIndex);
-						if (!selectedItem.toString().isEmpty()) {
-							((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(150);
-						}
+//						if (!selectedItem.toString().isEmpty()) {
+//							((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(150);
+//						}
 						MyTTS.getInstance(context).setPitch(0.4f);
 						MyTTS.getInstance(context).speak(
 								selectedItem.toString(),
