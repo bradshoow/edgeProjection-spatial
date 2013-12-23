@@ -12,6 +12,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.MotionEventCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,8 +20,6 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import fr.irit.edgeProjection.R;
@@ -29,12 +28,14 @@ import fr.irit.geotablet_interactions.common.MyTTS;
 import fr.irit.geotablet_interactions.common.OsmNode;
 
 public class MainActivity extends Activity {
-	private static final int TARGET_SIZE = 96; // Touch target size for on screen elements
+	private static final int TARGET_SIZE = 100; // Touch target size for on screen elements
 
 	private MyMapView mapView;
 	private Map<View, Set<OsmNode>> selectedItems = new HashMap<View, Set<OsmNode>>(2);
 	private Map<View, Integer> isOutsideView = new HashMap<View, Integer>(2);
 	float x = 0.0f, y = 0.0f;
+	
+	String lastAnnounce = "nothing";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -332,7 +333,9 @@ public class MainActivity extends Activity {
 		final Set<OsmNode> nodes = mapView.getNodes();
 		//retrieve selected node
 		Set<OsmNode> selectedNodes = new HashSet<OsmNode>();
-		if ((v != null) && ((v.getId() == R.id.vertical_list_layout) || (v.getId() == R.id.horizontal_list_layout))) {
+		
+		if ((v != null) && ((v.getId() == R.id.vertical_list_layout) 
+				|| (v.getId() == R.id.horizontal_list_layout))) {
 			selectedNodes = selectedItems.get(v);
 		} else {
 			for (Set<OsmNode> allSelectedNodes : selectedItems.values()) {
@@ -347,26 +350,31 @@ public class MainActivity extends Activity {
 					&& (n.toPoint(mapView).y >= y - TARGET_SIZE / 2)
 					&& (n.toPoint(mapView).x <= x + TARGET_SIZE / 2)
 					&& (n.toPoint(mapView).x >= x - TARGET_SIZE / 2)) {
-				if (  !MyTTS.getInstance(this).isSpeaking()  
-						&&  (selectedNodes.toString()).contains(n.getName()) 
-						) {
+				if (!MyTTS.getInstance(this).isSpeaking()  
+						&& (selectedNodes.toString()).contains(n.getName()) ) {
 					//((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
 					MyTTS.getInstance(this).setPitch(1.6f);
 					MyTTS.getInstance(this).speak(
 							getResources().getString(R.string.found) + 
 							n.getName(),
-							TextToSpeech.QUEUE_ADD,
+							TextToSpeech.QUEUE_FLUSH,
 							null);
+					lastAnnounce = n.getName();
 				}
-				else if (!MyTTS.getInstance(this).isSpeaking()
-						) {
+				else if (!MyTTS.getInstance(this).isSpeaking() ) {
 					//((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
 					MyTTS.getInstance(this).setPitch(1.6f);
 					MyTTS.getInstance(this).speak(
 							n.getName(),
-							TextToSpeech.QUEUE_ADD,
+							TextToSpeech.QUEUE_FLUSH,
 							null);
+					lastAnnounce = n.getName();
 				}
+			}
+			else if ( lastAnnounce.contentEquals(n.getName()) 
+						&& MyTTS.getInstance(this).isSpeaking() ) {
+				MyTTS.getInstance(this).stop();
+				lastAnnounce = "nothing";
 			}
 		}	
 	}
