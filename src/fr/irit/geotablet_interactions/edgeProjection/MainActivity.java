@@ -1,15 +1,23 @@
 package fr.irit.geotablet_interactions.edgeProjection;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
@@ -34,13 +42,32 @@ public class MainActivity extends Activity {
 	private Map<View, Set<OsmNode>> selectedItems = new HashMap<View, Set<OsmNode>>(2);
 	private Map<View, Integer> isOutsideView = new HashMap<View, Integer>(2);
 	float x = 0.0f, y = 0.0f;
+	private PrintWriter output;
+	private Date myDate;
+	private boolean firstTouch = true;
+	String logContact = "nothing";
+	String logAnnounce = "mute";
 	
-	String lastAnnounce = "nothing";
+	
+	private String lastAnnounce = "nothing";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		//create file for logging
+		myDate = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss",Locale.getDefault()); 
+		new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ "/geoTablet/").mkdir();
+		String logFilename = simpleDateFormat.format(new Date())+ "_"+ getString(R.string.app_name) +"_" +".csv";
+		File logFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ "/geoTablet/" + logFilename);
+		try {
+			output = new PrintWriter(new FileWriter(logFile));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 
     	//set Full screen landscape
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -329,6 +356,9 @@ public class MainActivity extends Activity {
 
 	//Mathieu's code's transformations to display all osmnode	
 	private void onTouchMapView(View v, float x, float y) {
+		
+
+		
 		//retrieve all nodes
 		final Set<OsmNode> nodes = mapView.getNodes();
 		//retrieve selected node
@@ -346,6 +376,7 @@ public class MainActivity extends Activity {
 		}
 				
 		for (OsmNode n : nodes) {
+			Log.e("lat",""+ n.getLatitude()*1000000);
 			if ((n.toPoint(mapView).y <= y + TARGET_SIZE / 2)
 					&& (n.toPoint(mapView).y >= y - TARGET_SIZE / 2)
 					&& (n.toPoint(mapView).x <= x + TARGET_SIZE / 2)
@@ -360,6 +391,8 @@ public class MainActivity extends Activity {
 							TextToSpeech.QUEUE_FLUSH,
 							null);
 					lastAnnounce = n.getName();
+					logAnnounce = n.getName();
+					
 				}
 				else if (!MyTTS.getInstance(this).isSpeaking() ) {
 					//((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
@@ -369,16 +402,40 @@ public class MainActivity extends Activity {
 							TextToSpeech.QUEUE_FLUSH,
 							null);
 					lastAnnounce = n.getName();
+					logAnnounce = n.getName();
 				}
+				logContact = n.getName();
 			}
 			else if ( lastAnnounce.contentEquals(n.getName()) 
 						&& MyTTS.getInstance(this).isSpeaking() ) {
 				MyTTS.getInstance(this).stop();
 				lastAnnounce = "nothing";
+				logAnnounce = "stopSpeak";
 			}
-		}	
+		}
+		//for logging
+		double lat = mapView.getProjection().fromPixels(x, y).getLatitudeE6();
+		double lon = mapView.getProjection().fromPixels(x, y).getLongitudeE6();
+		Datalogger(x,y,lat,lon,logContact,logAnnounce);
+		logAnnounce = "mute";
+		logContact = "nothing";
 	}
 	
+	
+	public void Datalogger (float x, float y, double lat, double lon, String logContact, String logAnnounce){
+		if (firstTouch){
+			output.println("time(ms);x;y;lat;lon;contact;annonce");
+			firstTouch = false;
+		}
+		Date touchDate = new Date();
+		String str = touchDate.getTime()-myDate.getTime() + ";" 
+		+ (int)x + ";" + (int)y + ";" 
+		+ lat/100000 + ";" + lon/100000 + ";"
+		+ logContact + ";" + logAnnounce;
+		output.println(str);
+		output.flush();
+	}
+		
 	
 	//Hélène's code to only display one osmnode
 //	private void onTouchMapView(View v, float x, float y) {
