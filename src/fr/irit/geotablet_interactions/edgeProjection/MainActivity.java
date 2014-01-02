@@ -41,14 +41,12 @@ public class MainActivity extends Activity {
 	private MyMapView mapView;
 	private Map<View, Set<OsmNode>> selectedItems = new HashMap<View, Set<OsmNode>>(2);
 	private Map<View, Integer> isOutsideView = new HashMap<View, Integer>(2);
-	float x = 0.0f, y = 0.0f;
+	private float x = 0.0f, y = 0.0f;
 	private PrintWriter output;
 	private Date myDate;
 	private boolean firstTouch = true;
-	String logContact = "nothing";
-	String logAnnounce = "mute";
-	
-	
+	private String logContact = "nothing";
+	private String logAnnounce = "mute";
 	private String lastAnnounce = "nothing";
 
 	@Override
@@ -68,7 +66,6 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		}
 		
-
     	//set Full screen landscape
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		
@@ -376,7 +373,6 @@ public class MainActivity extends Activity {
 		}
 				
 		for (OsmNode n : nodes) {
-			Log.e("lat",""+ n.getLatitude()*1000000);
 			if ((n.toPoint(mapView).y <= y + TARGET_SIZE / 2)
 					&& (n.toPoint(mapView).y >= y - TARGET_SIZE / 2)
 					&& (n.toPoint(mapView).x <= x + TARGET_SIZE / 2)
@@ -392,7 +388,6 @@ public class MainActivity extends Activity {
 							null);
 					lastAnnounce = n.getName();
 					logAnnounce = n.getName();
-					
 				}
 				else if (!MyTTS.getInstance(this).isSpeaking() ) {
 					//((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
