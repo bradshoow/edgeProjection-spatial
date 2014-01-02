@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.MotionEventCompat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,7 +45,7 @@ public class MainActivity extends Activity {
 	private Date myDate;
 	private boolean firstTouch = true;
 	private String logContact = "nothing";
-	public String logAnnounce = "mute";
+	private String logAnnounce = "mute";
 	private String lastAnnounce = "nothing";
 
 	public String getLogAnnounce() {
