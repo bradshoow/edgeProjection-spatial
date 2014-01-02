@@ -46,8 +46,16 @@ public class MainActivity extends Activity {
 	private Date myDate;
 	private boolean firstTouch = true;
 	private String logContact = "nothing";
-	private String logAnnounce = "mute";
+	public String logAnnounce = "mute";
 	private String lastAnnounce = "nothing";
+
+	public String getLogAnnounce() {
+		return logAnnounce;
+	}
+
+	public void setLogAnnounce(String logAnnounce) {
+		this.logAnnounce = logAnnounce;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -183,7 +191,7 @@ public class MainActivity extends Activity {
 					// from list to point of interest (without raising finger)
 					onTouchMapView(v, x - v.getWidth(), y); // Calculate x from top left of map view
 				}
-
+				
 				return super.onTouch(v, ev);
 			}
 
@@ -404,7 +412,7 @@ public class MainActivity extends Activity {
 			else if ( lastAnnounce.contentEquals(n.getName()) 
 						&& MyTTS.getInstance(this).isSpeaking() ) {
 				MyTTS.getInstance(this).stop();
-				lastAnnounce = "nothing";
+				lastAnnounce = "";
 				logAnnounce = "stopSpeak";
 			}
 		}
@@ -412,8 +420,8 @@ public class MainActivity extends Activity {
 		double lat = mapView.getProjection().fromPixels(x, y).getLatitudeE6();
 		double lon = mapView.getProjection().fromPixels(x, y).getLongitudeE6();
 		Datalogger(x,y,lat,lon,logContact,logAnnounce);
-		logAnnounce = "mute";
-		logContact = "nothing";
+		logAnnounce = "";
+		logContact = "";
 	}
 	
 	

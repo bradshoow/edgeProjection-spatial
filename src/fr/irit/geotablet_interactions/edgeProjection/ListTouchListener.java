@@ -33,6 +33,8 @@ public class ListTouchListener implements OnTouchListener {
 	private int direction;
 	private int lastAdapterIndex;
 	private int activePointerId;
+	
+	private String logAnnounce = "";
 
 	/**
 	 * Constructor
@@ -117,12 +119,16 @@ public class ListTouchListener implements OnTouchListener {
 							((MainActivity) context).setSelectedItem(v, (Set<OsmNode>) selectedItem);
 						}
 						lastAdapterIndex = adapterIndex;
+						logAnnounce = selectedItem.toString();
+						((MainActivity) context).Datalogger(x,y,0,0,"list",logAnnounce);
+						logAnnounce = "";
 					}
 				}
 			} else {
 				((MainActivity) context).onViewLeft(v, OUTSIDE_AND_TOUCHING_VIEW, x, y);
 			}
-
+			
+			
 			break;
 		}
 
