@@ -44,8 +44,8 @@ public class MainActivity extends Activity {
 	private PrintWriter output;
 	private Date myDate;
 	private boolean firstTouch = true;
-	private String logContact = "nothing";
-	private String logAnnounce = "mute";
+	private String logContact = "";
+	private String logAnnounce = "";
 	private String lastAnnounce = "nothing";
 
 	public String getLogAnnounce() {
@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
 		myDate = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss",Locale.getDefault()); 
 		new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ "/geoTablet/").mkdir();
-		String logFilename = simpleDateFormat.format(new Date())+ "_"+ getString(R.string.app_name) +"_" +".csv";
+		String logFilename = simpleDateFormat.format(new Date())+ "_"+ getString(R.string.app_name) +".csv";
 		File logFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ "/geoTablet/" + logFilename);
 		try {
 			output = new PrintWriter(new FileWriter(logFile));
