@@ -426,7 +426,7 @@ public class MainActivity extends Activity {
 	
 	public void Datalogger (float x, float y, double lat, double lon, String logContact, String logAnnounce){
 		if (firstTouch){
-			output.println("time(ms);x;y;lat;lon;contact;annonce");
+			output.println("time(ms);x;y;lat;lon;contact;announce");
 			firstTouch = false;
 		}
 		Date touchDate = new Date();
