@@ -28,6 +28,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import fr.irit.edgeProjection.R;
@@ -81,7 +82,7 @@ public class MainActivity extends Activity {
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 				
 		//hide menuBar (bottom)
-		//this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		
 		mapView = (MyMapView) findViewById(R.id.map_view);
