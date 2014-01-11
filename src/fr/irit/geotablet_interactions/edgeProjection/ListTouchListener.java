@@ -3,6 +3,7 @@ package fr.irit.geotablet_interactions.edgeProjection;
 import java.util.Set;
 
 import android.content.Context;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
@@ -108,9 +109,9 @@ public class ListTouchListener implements OnTouchListener {
 							&& (lastAdapterIndex != adapterIndex
 								|| !MyTTS.getInstance(context).isSpeaking())) {
 						Object selectedItem = adapter.getItem(adapterIndex);
-//						if (!selectedItem.toString().isEmpty()) {
-//							((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(150);
-//						}
+						if (!selectedItem.toString().isEmpty()) {
+							((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(150);
+						}
 						MyTTS.getInstance(context).setPitch(0.4f);
 						MyTTS.getInstance(context).speak(
 								selectedItem.toString(),

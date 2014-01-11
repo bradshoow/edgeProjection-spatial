@@ -18,6 +18,7 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.MotionEventCompat;
 import android.view.Menu;
@@ -386,7 +387,7 @@ public class MainActivity extends Activity {
 					&& (n.toPoint(mapView).x >= x - TARGET_SIZE / 2)) {
 				if (!MyTTS.getInstance(this).isSpeaking()  
 						&& (selectedNodes.toString()).contains(n.getName()) ) {
-					//((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
+					((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
 					MyTTS.getInstance(this).setPitch(1.6f);
 					MyTTS.getInstance(this).speak(
 							getResources().getString(R.string.found) + 
@@ -397,7 +398,7 @@ public class MainActivity extends Activity {
 					logAnnounce = n.getName();
 				}
 				else if (!MyTTS.getInstance(this).isSpeaking() ) {
-					//((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
+					((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(150);
 					MyTTS.getInstance(this).setPitch(1.6f);
 					MyTTS.getInstance(this).speak(
 							n.getName(),
