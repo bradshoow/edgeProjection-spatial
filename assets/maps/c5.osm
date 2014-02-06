@@ -10,19 +10,13 @@
     <tag k='name' v='Colibri' />
   </node>
   <node id='-739' action='modify' visible='true' version='1' lat='0.03287833759436707' lon='0.046442900188979265'>
-    <tag k='name' v='Mouette' />
-  </node>
-  <node id='-737' action='modify' visible='true' version='1' lat='-0.004764719770185607' lon='0.0534132028402249'>
-    <tag k='name' v='Mésange' />
-  </node>
-  <node id='-735' action='modify' visible='true' version='1' lat='-0.03818761831715306' lon='0.016376075297561146'>
-    <tag k='name' v='Perruche' />
+    <tag k='name' v='Pensée' />
   </node>
   <node id='-733' action='modify' visible='true' version='1' lat='-0.03485058352575679' lon='-0.06235595105707171'>
-    <tag k='name' v='Pigeon' />
+    <tag k='name' v='Tournesol' />
   </node>
   <node id='-731' action='modify' visible='true' version='1' lat='0.038772584779572204' lon='-0.043373036695479476'>
-    <tag k='name' v='Hirondelle' />
+    <tag k='name' v='Iris' />
   </node>
   <node id='-729' action='modify' visible='true' version='1' lat='0.036136880056345945' lon='-0.044392534255365386' />
   <node id='-727' action='modify' visible='true' version='1' lat='0.03217954091797819' lon='-0.04601883830019769' />
